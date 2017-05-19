@@ -2,20 +2,20 @@ package com.digitalsingular.traininglog.workout;
 
 import java.time.Duration;
 
-public class Rest {
+public class Length {
 
 	private final Duration duration;
 
-	private Rest(Duration duration) {
+	private Length(Duration duration) {
 		super();
 		this.duration = duration;
 	}
 
-	public Rest of(Duration duration) {
-		if (duration.isNegative() || duration.isZero()) {
-			throw new IllegalArgumentException("You can't un-rest!");
+	public Length of(Duration duration) {
+		if (duration.isNegative()) {
+			throw new IllegalArgumentException("You can't un-workout!");
 		}
-		return new Rest(duration);
+		return new Length(duration);
 	}
 
 	public Duration getDuration() {
@@ -41,7 +41,7 @@ public class Rest {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		final Rest other = (Rest) obj;
+		final Length other = (Length) obj;
 		if (duration == null) {
 			if (other.duration != null) {
 				return false;
@@ -54,7 +54,6 @@ public class Rest {
 
 	@Override
 	public String toString() {
-		return "Rest [duration=" + duration + "]";
+		return "Length [duration=" + duration + "]";
 	}
-
 }

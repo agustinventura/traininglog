@@ -3,11 +3,8 @@ package com.digitalsingular.traininglog.traininglog;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.digitalsingular.traininglog.activity.Activity;
+import com.digitalsingular.traininglog.workout.Activity;
 
-import lombok.Data;
-
-@Data
 public class TrainingDay {
 
 	private LocalDate date;
