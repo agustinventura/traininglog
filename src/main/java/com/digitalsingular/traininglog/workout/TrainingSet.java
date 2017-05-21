@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.digitalsingular.traininglog.exercise.Exercise;
 
-public class Set {
+public class TrainingSet {
 
 	private final Exercise exercise;
 
@@ -16,7 +16,7 @@ public class Set {
 
 	private final Optional<Weight> weight;
 
-	public Set(Exercise exercise, Optional<Repetitions> repetitions, Optional<Length> length, Optional<Rest> rest,
+	public TrainingSet(Exercise exercise, Optional<Repetitions> repetitions, Optional<Length> length, Optional<Rest> rest,
 			Optional<Weight> weight) {
 		super();
 		this.exercise = exercise;
@@ -69,7 +69,7 @@ public class Set {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		final Set other = (Set) obj;
+		final TrainingSet other = (TrainingSet) obj;
 		if (exercise == null) {
 			if (other.exercise != null) {
 				return false;
@@ -117,13 +117,13 @@ public class Set {
 	public static class Builder {
 		private final Exercise exercise;
 
-		private Optional<Repetitions> repetitions;
+		private Repetitions repetitions;
 
-		private Optional<Length> length;
+		private Length length;
 
-		private Optional<Rest> rest;
+		private Rest rest;
 
-		private Optional<Weight> weight;
+		private Weight weight;
 
 		public Builder(Exercise exercise) {
 			super();
@@ -131,33 +131,34 @@ public class Set {
 		}
 
 		public Builder repetitions(Repetitions repetitions) {
-			this.repetitions = Optional.ofNullable(repetitions);
+			this.repetitions = repetitions;
 			return this;
 		}
 
 		public Builder length(Length length) {
-			this.length = Optional.ofNullable(length);
+			this.length = length;
 			return this;
 		}
 
 		public Builder rest(Rest rest) {
-			this.rest = Optional.ofNullable(rest);
+			this.rest = rest;
 			return this;
 		}
 
 		public Builder weight(Weight weight) {
-			this.weight = Optional.ofNullable(weight);
+			this.weight = weight;
 			return this;
 		}
 
-		public Set build() {
-			Set set = null;
-			if (repetitions.isPresent() && length.isPresent()) {
+		public TrainingSet build() {
+			TrainingSet set = null;
+			if (repetitions != null && length != null) {
 				throw new IllegalArgumentException("You can't have a Set with repetitions and length!");
-			} else if (!repetitions.isPresent() && !length.isPresent()) {
+			} else if (repetitions == null && length == null) {
 				throw new IllegalArgumentException("A Set must have either repetitions or length!");
 			} else {
-				set = new Set(exercise, repetitions, length, rest, weight);
+				set = new TrainingSet(exercise, Optional.ofNullable(repetitions), Optional.ofNullable(length),
+						Optional.ofNullable(rest), Optional.ofNullable(weight));
 			}
 			return set;
 		}
