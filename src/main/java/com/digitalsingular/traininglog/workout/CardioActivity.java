@@ -2,16 +2,21 @@ package com.digitalsingular.traininglog.workout;
 
 import com.digitalsingular.traininglog.exercise.Exercise;
 
-public class GroupActivity extends Activity {
+import java.util.Objects;
+
+public class CardioActivity extends Activity {
 
 	private final Exercise exercise;
 
 	private Length length;
 
-	public GroupActivity(String name, Exercise exercise, Length length) {
+	private Level level;
+
+	public CardioActivity(String name, Exercise exercise, Length length, Level level) {
 		super(name);
 		this.exercise = exercise;
 		this.length = length;
+		this.level = level;
 	}
 
 	public Exercise getExercise() {
@@ -26,11 +31,20 @@ public class GroupActivity extends Activity {
 		this.length = length;
 	}
 
+	public Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
 	@Override
 	public String toString() {
-		return "GroupActivity{" +
+		return "CardioActivity{" +
 				"exercise=" + exercise +
 				", length=" + length +
+				", level=" + level +
 				'}';
 	}
 }
