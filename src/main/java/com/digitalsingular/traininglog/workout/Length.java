@@ -11,7 +11,7 @@ public class Length {
 		this.duration = duration;
 	}
 
-	public Length of(Duration duration) {
+	public static Length of(Duration duration) {
 		if (duration.isNegative()) {
 			throw new IllegalArgumentException("You can't un-workout!");
 		}

@@ -2,7 +2,6 @@ package com.digitalsingular.traininglog.workout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class SerialActivity extends Activity {
 
@@ -30,8 +29,8 @@ public class SerialActivity extends Activity {
 
 	@Override
 	public String toString() {
-		return "SerialActivity{" +
-				"trainingSets=" + trainingSets +
-				'}';
+		return "SerialActivity [trainingSets=" + trainingSets + "]";
 	}
+
+	
 }

@@ -1,9 +1,12 @@
 package com.digitalsingular.traininglog.user;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.digitalsingular.traininglog.routine.Routine;
+import com.digitalsingular.traininglog.workout.Activity;
 
 public class User {
 
@@ -82,5 +85,13 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", routines=" + routines + ", trainingLog=" + trainingLog + "]";
+	}
+
+	public Optional<TrainingDay> log(Activity activity) {
+		Optional<TrainingDay> loggedDay = Optional.empty();
+		if (activity != null) {
+			loggedDay = trainingLog.log(activity);
+		}
+		return loggedDay;
 	}
 }

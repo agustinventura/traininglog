@@ -2,21 +2,21 @@ package com.digitalsingular.traininglog.workout;
 
 public class Level {
 
-	private final int hardness;
+	public enum Hardness {
+		LIGHT, MEDIUM, HARD;
+	}
+	private final Hardness hardness;
 
-	private Level(int hardness) {
+	private Level(Hardness hardness) {
 		super();
 		this.hardness = hardness;
 	}
 
-	public static Level of(int hardness) {
-		if (hardness < 0) {
-			throw new IllegalArgumentException("You can't workout with negative hardness!");
-		}
+	public static Level of(Hardness hardness) {
 		return new Level(hardness);
 	}
 
-	public int getHardness() {
+	public Hardness getHardness() {
 		return hardness;
 	}
 
@@ -24,25 +24,21 @@ public class Level {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + hardness;
+		result = prime * result + ((hardness == null) ? 0 : hardness.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
-		final Level other = (Level) obj;
-		if (hardness != other.hardness) {
+		Level other = (Level) obj;
+		if (hardness != other.hardness)
 			return false;
-		}
 		return true;
 	}
 

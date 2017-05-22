@@ -28,9 +28,6 @@ public class GroupActivity extends Activity {
 
 	@Override
 	public String toString() {
-		return "GroupActivity{" +
-				"exercise=" + exercise +
-				", length=" + length +
-				'}';
+		return "GroupActivity [exercise=" + exercise + ", length=" + length + ", getName()=" + getName() + "]";
 	}
 }

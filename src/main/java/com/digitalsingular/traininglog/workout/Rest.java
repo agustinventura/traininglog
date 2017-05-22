@@ -11,7 +11,7 @@ public class Rest {
 		this.duration = duration;
 	}
 
-	public Rest of(Duration duration) {
+	public static Rest of(Duration duration) {
 		if (duration.isNegative() || duration.isZero()) {
 			throw new IllegalArgumentException("You can't un-rest!");
 		}

@@ -30,7 +30,7 @@ public class TrainingDay {
 		return activitiesClone;
 	}
 
-	public void add(Activity activity) {
+	void add(Activity activity) {
 		if (activity != null) {
 			activities.add(activity);
 		}

@@ -37,4 +37,10 @@ public class CardioActivity extends Activity {
 		this.level = level;
 	}
 
+	@Override
+	public String toString() {
+		return "CardioActivity [exercise=" + exercise + ", length=" + length + ", level=" + level + ", getName()="
+				+ getName() + "]";
+	}
+
 }
