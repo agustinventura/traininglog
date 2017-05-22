@@ -2,8 +2,6 @@ package com.digitalsingular.traininglog.workout;
 
 import com.digitalsingular.traininglog.exercise.Exercise;
 
-import java.util.Objects;
-
 public class CardioActivity extends Activity {
 
 	private final Exercise exercise;
@@ -39,12 +37,4 @@ public class CardioActivity extends Activity {
 		this.level = level;
 	}
 
-	@Override
-	public String toString() {
-		return "CardioActivity{" +
-				"exercise=" + exercise +
-				", length=" + length +
-				", level=" + level +
-				'}';
-	}
 }

@@ -1,45 +1,60 @@
 package com.digitalsingular.traininglog.routine;
 
-import com.digitalsingular.traininglog.workout.Activity;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+
+import com.digitalsingular.traininglog.workout.Activity;
 
 public class Workout {
 
-    private final List<Activity> activities;
+	private final List<Activity> activities;
 
-    public Workout(Activity... activities) {
-        this.activities = Arrays.asList(activities);
-    }
+	public Workout(Activity... activities) {
+		this.activities = Arrays.asList(activities);
+	}
 
-    public List<Activity> getActivities() {
-        List<Activity> activitiesClone = new ArrayList<>(activities.size());
-        for (Activity activity: activities) {
-            activitiesClone.add(activity);
-        }
-        return activitiesClone;
-    }
+	public List<Activity> getActivities() {
+		final List<Activity> activitiesClone = new ArrayList<>(activities.size());
+		for (final Activity activity : activities) {
+			activitiesClone.add(activity);
+		}
+		return activitiesClone;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Workout workout = (Workout) o;
-        return Objects.equals(activities, workout.activities);
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((activities == null) ? 0 : activities.hashCode());
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(activities);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Workout other = (Workout) obj;
+		if (activities == null) {
+			if (other.activities != null) {
+				return false;
+			}
+		} else if (!activities.equals(other.activities)) {
+			return false;
+		}
+		return true;
+	}
 
-    @Override
-    public String toString() {
-        return "Workout{" +
-                "activities=" + activities +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Workout [activities=" + activities + "]";
+	}
+
 }

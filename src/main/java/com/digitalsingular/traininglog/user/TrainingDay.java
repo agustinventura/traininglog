@@ -1,9 +1,11 @@
 package com.digitalsingular.traininglog.user;
 
-import com.digitalsingular.traininglog.workout.Activity;
-
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.digitalsingular.traininglog.workout.Activity;
 
 public class TrainingDay {
 
@@ -21,8 +23,8 @@ public class TrainingDay {
 	}
 
 	public List<Activity> getActivities() {
-		List<Activity> activitiesClone = new ArrayList<>(activities.size());
-		for (Activity activity: activities) {
+		final List<Activity> activitiesClone = new ArrayList<>(activities.size());
+		for (final Activity activity : activities) {
 			activitiesClone.add(activity);
 		}
 		return activitiesClone;
@@ -35,23 +37,37 @@ public class TrainingDay {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		TrainingDay that = (TrainingDay) o;
-		return Objects.equals(date, that.date);
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		return result;
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(date);
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final TrainingDay other = (TrainingDay) obj;
+		if (date == null) {
+			if (other.date != null) {
+				return false;
+			}
+		} else if (!date.equals(other.date)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TrainingDay{" +
-				"date=" + date +
-				", activities=" + activities +
-				'}';
+		return "TrainingDay [date=" + date + ", activities=" + activities + "]";
 	}
 }
