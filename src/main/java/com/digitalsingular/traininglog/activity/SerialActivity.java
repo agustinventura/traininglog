@@ -1,4 +1,4 @@
-package com.digitalsingular.traininglog.workout;
+package com.digitalsingular.traininglog.activity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.digitalsingular.traininglog.workout.Activity;
+import com.digitalsingular.traininglog.activity.Activity;
 
 public class TrainingDay {
 

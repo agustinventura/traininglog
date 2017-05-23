@@ -1,12 +1,11 @@
 package com.digitalsingular.traininglog.user;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.digitalsingular.traininglog.activity.Activity;
 import com.digitalsingular.traininglog.routine.Routine;
-import com.digitalsingular.traininglog.workout.Activity;
 
 public class User {
 
@@ -23,13 +22,6 @@ public class User {
 		this.trainingLog = new TrainingLog();
 	}
 
-	public User(String username, List<Routine> routines) {
-		super();
-		this.username = username;
-		this.routines = routines;
-		this.trainingLog = new TrainingLog();
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -40,16 +32,6 @@ public class User {
 			clone.add(routine);
 		}
 		return clone;
-	}
-
-	public void add(Routine routine) {
-		if (routine != null) {
-			this.routines.add(routine);
-		}
-	}
-
-	public void remove(Routine routine) {
-		this.routines.remove(routine);
 	}
 
 	@Override
@@ -93,5 +75,12 @@ public class User {
 			loggedDay = trainingLog.log(activity);
 		}
 		return loggedDay;
+	}
+
+	public List<Routine> assign(Routine routine) {
+		if (routine != null) {
+			this.routines.add(routine);
+		}
+		return getRoutines();
 	}
 }

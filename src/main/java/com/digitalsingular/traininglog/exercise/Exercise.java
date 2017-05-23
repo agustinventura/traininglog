@@ -2,5 +2,5 @@ package com.digitalsingular.traininglog.exercise;
 
 public enum Exercise {
 
-	BENCH_PRESS, SQUATS, DEADLIFT, PULL_UP, BODY_PUMP, SPINNING, PILATES, YOGA, RUN;
+	BENCH_PRESS, SQUATS, BARBELL_ROW, DEADLIFT, OVERHEAD_PRESS, YOGA, RUN;
 }

@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.digitalsingular.traininglog.workout.Activity;
+import com.digitalsingular.traininglog.activity.Activity;
 
 public class Workout {
 
+	private final String name;
+
 	private final List<Activity> activities;
 
-	public Workout(Activity... activities) {
+	Workout(String name, Activity... activities) {
+		this.name = name;
 		this.activities = Arrays.asList(activities);
 	}
 
@@ -27,6 +30,7 @@ public class Workout {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((activities == null) ? 0 : activities.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -49,12 +53,19 @@ public class Workout {
 		} else if (!activities.equals(other.activities)) {
 			return false;
 		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Workout [activities=" + activities + "]";
+		return "Workout [name=" + name + ", activities=" + activities + "]";
 	}
 
 }

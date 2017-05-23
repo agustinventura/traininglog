@@ -1,4 +1,4 @@
-package com.digitalsingular.traininglog.workout;
+package com.digitalsingular.traininglog.activity;
 
 import com.digitalsingular.traininglog.exercise.Exercise;
 

@@ -1,8 +1,9 @@
 package com.digitalsingular.traininglog.routine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import com.digitalsingular.traininglog.activity.Activity;
 
 public class Routine {
 
@@ -13,11 +14,6 @@ public class Routine {
 	public Routine(String name) {
 		this.name = name;
 		workouts = new ArrayList<>();
-	}
-
-	public Routine(String name, Workout... workouts) {
-		this.name = name;
-		this.workouts = Arrays.asList(workouts);
 	}
 
 	public String getName() {
@@ -65,5 +61,12 @@ public class Routine {
 	@Override
 	public String toString() {
 		return "Routine [name=" + name + ", workouts=" + workouts + "]";
+	}
+
+	public Routine withWorkout(String workoutName, Activity... activities) {
+		if (workoutName != null && activities.length != 0) {
+			this.workouts.add(new Workout(workoutName, activities));
+		}
+		return this;
 	}
 }

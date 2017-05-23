@@ -7,25 +7,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
-import com.digitalsingular.traininglog.workout.Activity;
+import com.digitalsingular.traininglog.activity.Activity;
 
 public class TrainingLog {
 
 	private final Map<LocalDate, TrainingDay> trainingDays;
 
-	public TrainingLog() {
+	TrainingLog() {
 		this.trainingDays = new TreeMap<>();
 	}
 
-	private void add(TrainingDay trainingDay) {
-		if (trainingDay != null) {
-			this.trainingDays.put(trainingDay.getDate(), trainingDay);
-		}
-	}
-
 	public List<TrainingDay> getTrainingDays() {
-		List<TrainingDay> trainingDaysClone = new ArrayList<>(trainingDays.size());
-		for (Map.Entry<LocalDate, TrainingDay> day : trainingDays.entrySet()) {
+		final List<TrainingDay> trainingDaysClone = new ArrayList<>(trainingDays.size());
+		for (final Map.Entry<LocalDate, TrainingDay> day : trainingDays.entrySet()) {
 			trainingDaysClone.add(day.getValue());
 		}
 		return trainingDaysClone;
@@ -69,15 +63,21 @@ public class TrainingLog {
 	Optional<TrainingDay> log(Activity activity) {
 		Optional<TrainingDay> loggedDay = Optional.empty();
 		if (activity != null) {
-			LocalDate today = LocalDate.now();
+			final LocalDate today = LocalDate.now();
 			if (trainingDays.containsKey(today)) {
 				trainingDays.get(today).add(activity);
 			} else {
-				TrainingDay trainingDay = new TrainingDay(today, activity);
+				final TrainingDay trainingDay = new TrainingDay(today, activity);
 				add(trainingDay);
 				loggedDay = Optional.of(trainingDay);
 			}
 		}
 		return loggedDay;
+	}
+
+	private void add(TrainingDay trainingDay) {
+		if (trainingDay != null) {
+			this.trainingDays.put(trainingDay.getDate(), trainingDay);
+		}
 	}
 }
