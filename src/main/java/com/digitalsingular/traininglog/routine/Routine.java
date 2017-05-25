@@ -74,19 +74,36 @@ public class Routine {
 		return this;
 	}
 
-	public Optional<Workout> getLastWorkout() {
+	public Optional<Workout> getFirstWorkout() {
 		Optional<Workout> lastWorkout = Optional.empty();
 		if (!workouts.isEmpty()) {
-			lastWorkout = Optional.of(workouts.get(workouts.size() - 1));
+			lastWorkout = Optional.of(workouts.get(0));
 		}
 		return lastWorkout;
 	}
 
-	public Optional<Workout> findWorkout(List<Activity> activitiesPerformed) {
+	Optional<Workout> getNextWorkout(List<Activity> activities) {
 		Optional<Workout> workoutFound = Optional.empty();
-		Collections.reverse(activitiesPerformed);
+		if (activities.isEmpty() && !workouts.isEmpty()) {
+			workoutFound = Optional.of(workouts.get(0));
+		} else {
+			workoutFound = findLastWorkoutInActivities(activities, workoutFound);
+			if (workoutFound.isPresent()) {
+				final int lastWorkoutPosition = workouts.indexOf(workoutFound.get());
+				int nextWorkoutPosition = lastWorkoutPosition + 1;
+				if (nextWorkoutPosition >= workouts.size()) {
+					nextWorkoutPosition = 0;
+				}
+				workoutFound = Optional.of(workouts.get(nextWorkoutPosition));
+			}
+		}
+		return workoutFound;
+	}
+
+	private Optional<Workout> findLastWorkoutInActivities(List<Activity> activities, Optional<Workout> workoutFound) {
+		Collections.reverse(activities);
 		List<Workout> workouts = getWorkouts();
-		final Iterator<Activity> reverseActivityIt = activitiesPerformed.iterator();
+		final Iterator<Activity> reverseActivityIt = activities.iterator();
 		while (reverseActivityIt.hasNext() && workouts.size() > 1) {
 			final Activity activityPerformed = reverseActivityIt.next();
 			if (workouts.stream().flatMap(workout -> workout.getActivities().stream())

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import com.digitalsingular.traininglog.activity.Activity;
 import com.digitalsingular.traininglog.routine.Routine;
-import com.digitalsingular.traininglog.routine.Workout;
 
 public class User {
 
@@ -86,22 +85,14 @@ public class User {
 		return getRoutines();
 	}
 
-	public Optional<Workout> getNextWorkout() {
-		Optional<Workout> nextWorkout = Optional.empty();
-		final List<TrainingDay> trainingDays = trainingLog.getTrainingDays();
-		if (trainingDays.isEmpty()) {
-			nextWorkout = getLastRoutine().map(routine -> routine.getLastWorkout()).orElse(Optional.empty());
-		} else {
-			final List<Activity> activities = trainingDays.stream()
-					.flatMap(trainingDay -> trainingDay.getActivities().stream()).collect(Collectors.toList());
-			if (getLastRoutine().isPresent()) {
-				nextWorkout = getLastRoutine().get().findWorkout(activities);
-			}
-		}
-		return nextWorkout;
+	public Optional<Routine> getCurrentRoutine() {
+		return routines.isEmpty() ? Optional.empty() : Optional.of(routines.get(routines.size() - 1));
 	}
 
-	private Optional<Routine> getLastRoutine() {
-		return routines.isEmpty() ? Optional.empty() : Optional.of(routines.get(routines.size() - 1));
+	public List<Activity> getPerformedActivities() {
+		final List<TrainingDay> trainingDays = trainingLog.getTrainingDays();
+		final List<Activity> activities = trainingDays.stream()
+				.flatMap(trainingDay -> trainingDay.getActivities().stream()).collect(Collectors.toList());
+		return activities;
 	}
 }
