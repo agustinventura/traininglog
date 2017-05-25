@@ -65,7 +65,7 @@ public class RoutineTests {
 		return new CardioActivity(shortRun, Exercise.RUN, Length.of(Duration.ofMinutes(5L)), Level.of(Hardness.LIGHT));
 	}
 
-	private static SerialActivity getStrongliftsSquatsSet() {
+	public static SerialActivity getStrongliftsSquatsSet() {
 		final String squatSets = "Stronglifts Squat Sets";
 		final SerialActivity strongLiftsSquatsSet = new SerialActivity(squatSets);
 		final TrainingSet squatsSet = new TrainingSet.Builder(Exercise.SQUATS).repetitions(Repetitions.of(5))
@@ -87,7 +87,7 @@ public class RoutineTests {
 		return strongLiftsBenchPressSet;
 	}
 
-	private static Activity getStrongliftsBarbellRowSet() {
+	public static Activity getStrongliftsBarbellRowSet() {
 		final String barbellRowSets = "Stronglifts Barbell Row Sets";
 		final SerialActivity strongLiftsBarbellRowSet = new SerialActivity(barbellRowSets);
 		final TrainingSet barbellRowSet = new TrainingSet.Builder(Exercise.BARBELL_ROW).repetitions(Repetitions.of(5))

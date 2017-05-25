@@ -15,7 +15,7 @@ public class TrainingDay {
 
 	public TrainingDay(LocalDate date, Activity... activities) {
 		this.date = date;
-		this.activities = Arrays.asList(activities);
+		this.activities = new ArrayList<>(Arrays.asList(activities));
 	}
 
 	public LocalDate getDate() {

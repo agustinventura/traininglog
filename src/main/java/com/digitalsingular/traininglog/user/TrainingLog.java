@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.digitalsingular.traininglog.activity.Activity;
 
 public class TrainingLog {
 
-	private final Map<LocalDate, TrainingDay> trainingDays;
+	private final SortedMap<LocalDate, TrainingDay> trainingDays;
 
 	TrainingLog() {
 		this.trainingDays = new TreeMap<>();
@@ -66,6 +67,7 @@ public class TrainingLog {
 			final LocalDate today = LocalDate.now();
 			if (trainingDays.containsKey(today)) {
 				trainingDays.get(today).add(activity);
+				loggedDay = Optional.of(trainingDays.get(today));
 			} else {
 				final TrainingDay trainingDay = new TrainingDay(today, activity);
 				add(trainingDay);

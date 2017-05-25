@@ -1,7 +1,11 @@
 package com.digitalsingular.traininglog.routine;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.digitalsingular.traininglog.activity.Activity;
 
@@ -68,5 +72,32 @@ public class Routine {
 			this.workouts.add(new Workout(workoutName, activities));
 		}
 		return this;
+	}
+
+	public Optional<Workout> getLastWorkout() {
+		Optional<Workout> lastWorkout = Optional.empty();
+		if (!workouts.isEmpty()) {
+			lastWorkout = Optional.of(workouts.get(workouts.size() - 1));
+		}
+		return lastWorkout;
+	}
+
+	public Optional<Workout> findWorkout(List<Activity> activitiesPerformed) {
+		Optional<Workout> workoutFound = Optional.empty();
+		Collections.reverse(activitiesPerformed);
+		List<Workout> workouts = getWorkouts();
+		final Iterator<Activity> reverseActivityIt = activitiesPerformed.iterator();
+		while (reverseActivityIt.hasNext() && workouts.size() > 1) {
+			final Activity activityPerformed = reverseActivityIt.next();
+			if (workouts.stream().flatMap(workout -> workout.getActivities().stream())
+					.anyMatch(activity -> activity.equals(activityPerformed))) {
+				workouts = workouts.stream().filter(workout -> workout.getActivities().contains(activityPerformed))
+						.collect(Collectors.toList());
+			}
+		}
+		if (workouts.size() == 1) {
+			workoutFound = Optional.of(workouts.get(0));
+		}
+		return workoutFound;
 	}
 }
